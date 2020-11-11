@@ -1,0 +1,8 @@
+---
+mkt_application_service_list:
+ - docker
+
+application_shell_status_commands:
+ - 'sh -c "sudo systemctl status docker"'
+ - 'docker images'
+

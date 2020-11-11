@@ -1,0 +1,83 @@
+---
+# This playbook is learningtechnix.in propritary for managing 
+# application control for systemd and initd based services.
+# Author: Hemant Gangwar
+# v 1.0 Dated 05 November 2020
+
+- name: Playbook for application control, make sure you are using tags 
+  hosts: all
+  gather_facts: yes
+  tasks:
+
+# Shutdown task, make sure to invoke it using appropriate tag
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tage shutdown
+
+   - name: Bringing down |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: stopped
+     with_items: "{{ mkt_application_service_list }}"
+     tags: shutdown
+
+   - name: Bringing down |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_stop_commands }}"
+     when: application_shell_stop_commands is defined
+     tags: shutdown
+
+# Startup task, make sure to invoke it using appropriate tag
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tage startup
+
+   - name: Starting back |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: started
+     with_items: "{{ mkt_application_service_list }}"
+     tags: startup
+
+   - name: Starting back |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_start_commands }}"
+     when: application_shell_start_commands is defined
+     tags: startup
+
+# Verification of service status
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tage verify
+
+   - name: "|SYSTEMD| service status verification"
+     shell: /bin/systemctl status {{ item }}
+     with_items: "{{ mkt_application_service_list }}"
+     when: ansible_distribution_major_version == '7'
+     tags: verify
+
+   - name: "|INITD| service status verification"
+     shell: /etc/init.d/{{ item }} status
+     with_items: "{{ mkt_application_service_list }}"
+     when: ansible_distribution_major_version != '7'
+     tags: verify
+
+   - name: "|SHELL| commands to verify status of services"
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_status_commands }}"
+     when: application_shell_status_commands is defined
+     tags: verify
+
+# Restart of service status
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags verify
+
+   - name: Restarting back |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: restarted
+     with_items: "{{ mkt_application_service_list }}"
+     tags: restserv
+
+   - name: Starting back |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_restart_commands }}"
+     when: application_shell_restart_commands is defined
+     tags: restserv

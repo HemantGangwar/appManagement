@@ -1,0 +1,7 @@
+---
+mkt_application_service_list:
+ - httpd
+ - ntpd
+
+application_shell_status_commands:
+ - 'sh -c "sudo service httpd status"'
