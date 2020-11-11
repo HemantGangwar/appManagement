@@ -1,0 +1,17 @@
+---
+# Startup task, make sure to invoke it using appropriate tag
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags startup
+
+   - name: Starting back |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: started
+     with_items: "{{ mkt_application_service_list }}"
+     tags: startup
+
+   - name: Starting back |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_start_commands }}"
+     when: application_shell_start_commands is defined
+     tags: startup

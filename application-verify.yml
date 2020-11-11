@@ -1,0 +1,22 @@
+---
+# Verification of service status
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags verify
+
+   - name: "|SYSTEMD| service status verification"
+     shell: /bin/systemctl status {{ item }}
+     with_items: "{{ mkt_application_service_list }}"
+     when: ansible_distribution_major_version == '7'
+     tags: verify
+
+   - name: "|INITD| service status verification"
+     shell: /etc/init.d/{{ item }} status
+     with_items: "{{ mkt_application_service_list }}"
+     when: ansible_distribution_major_version != '7'
+     tags: verify
+
+   - name: "|SHELL| commands to verify status of services"
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_status_commands }}"
+     when: application_shell_status_commands is defined
+     tags: verify

@@ -1,0 +1,17 @@
+---
+# Restart of service status
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags restserv
+
+   - name: Restarting back |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: restarted
+     with_items: "{{ mkt_application_service_list }}"
+     tags: restserv
+
+   - name: Starting back |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_restart_commands }}"
+     when: application_shell_restart_commands is defined
+     tags: restserv

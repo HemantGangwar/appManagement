@@ -1,0 +1,17 @@
+---
+# Shutdown task, make sure to invoke it using appropriate tag
+# Use this task using below command
+# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags shutdown
+
+   - name: Bringing down |SYSTEMD| & |INITD| based services
+     service:
+       name: "{{ item }}"
+       state: stopped
+     with_items: "{{ mkt_application_service_list }}"
+     tags: shutdown
+
+   - name: Bringing down |SHELL| based applications
+     shell: "{{ item }}"
+     with_items: "{{ application_shell_stop_commands }}"
+     when: application_shell_stop_commands is defined
+     tags: shutdown
