@@ -4,10 +4,10 @@
 # Author: Hemant Gangwar
 # v 1.0 Dated 05 November 2020
 # Execute playbook with tags only
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags restserv
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags startup
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags shutdown
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags verify
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags restserv
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags startup
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags shutdown
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags verify
 
 - name: Playbook for application control, make sure you are using tags 
   hosts: all
