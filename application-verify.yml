@@ -7,7 +7,6 @@
      shell: /bin/systemctl status {{ item }}
      with_items: "{{ mkt_application_service_list }}"
      when: ansible_distribution_major_version == '7'
-     register: custom_commands
      tags: verify
 
    - name: "|INITD| service status verification"
@@ -24,8 +23,9 @@
      register: custom_commands
      tags: verify
 
-#   - name: Now displaying output of above command
-#    debug:
-#      msg: "{{ item }}"
-#    loop: "{{ custom_commands.results|map(attribute='stdout_lines')|list }}"
-#    ignore_errors: true
+   - name: Now displaying output of above command
+     debug:
+      msg: "{{ item }}"
+     with_items: "{{ custom_commands.results|map(attribute='stdout_lines')|list }}"
+     tags: verify
+     ignore_errors: true
