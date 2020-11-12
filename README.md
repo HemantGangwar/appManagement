@@ -1,12 +1,14 @@
 # appManagent
 
-This playbook is meant to do following tasks:
+This **Ansible** playbook is meant to do following tasks on EL6/EL7 onwards systems:
 
 - Stop, Start, Restart, Status of
   - sysvinit
   - systemd
   
-- Shell base commands for applications stop/start
+- Executing shell base commands for applications stop/start
 
-Playbook Structure
+Playbook Structure:
+
+1. It is divided in following structure
 
