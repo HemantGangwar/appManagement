@@ -24,7 +24,7 @@ It is divided in following structure:
 ## **USAGE**:
 
 1. Create host_vars or group_vars directory.
-2. Now create respective hosts or group yaml files as displayed below:
+2. Now create respective hosts or group yaml files as displayed below. Most importantly notice the use of varibles here.
 
 ![image](https://user-images.githubusercontent.com/38517925/99140412-e2978580-2667-11eb-89e1-eff50046ef30.png)
 
@@ -36,12 +36,23 @@ A sample inventory file given below, we are trying to avoid filling variables he
 
 ![image](https://user-images.githubusercontent.com/38517925/99140426-022eae00-2668-11eb-9953-3733b32befd3.png)
 
+## **VARIABLES USED**:
+
+Below variables are used innthis playbook and it should be properly understood to use playbook effectively. 
+
+
+- **mkt_application_service_list** : Applications name list.
+- **application_shell_start_commands** : Shell based application start commands.
+- **application_shell_stop_commands** : Shell based application stop commands.
+- **application_shell_restart_commands** : Shell based application restart commands.
+- **application_shell_status_commands** : Shell based application status commands.
+
 ## **PLAYBOOK EXECUTION**:
 
 Playbook **generic_application_control.yml** is written in such a way that it won't run without *tags* , so one can use below commands for it's execution:
 
 Index | Action | Commands
------ | ------ | --------
+----- | ------ | ------
 1 | **Starting of applications** | *ansible-playbook -i inventory generic_application_control.yml --tags startup*
 2 | **Stopping of applications** | *ansible-playbook -i inventory generic_application_control.yml --tags shutdown*
 3 | **Restart  of applications** | *ansible-playbook -i inventory generic_application_control.yml --tags restserv*
