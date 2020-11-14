@@ -1,4 +1,6 @@
-# appManagent
+![image](https://user-images.githubusercontent.com/38517925/86527948-5f983e80-bec1-11ea-9be7-03a6cc7792c8.png)
+
+# appManagent - For application Management on Nix servers
 
 This **Ansible** playbook is meant to do following tasks on EL6/EL7 onwards systems:
 
@@ -17,16 +19,7 @@ It is divided in following structure:
 3. Variable placement --> host_vars or group_vars
 4. Inventory file --> Inventory
 
-├── application-restart.yml
-├── application-start.yml
-├── application-stop.yml
-├── application-verify.yml
-├── generic_application_control.yml
-├── host_vars
-│   ├── dnode3.yml
-│   └── node6.lab.example.com.yml
-├── inventory
-└── README.md
+![image](https://user-images.githubusercontent.com/38517925/98974756-4708f680-253b-11eb-8276-106ad5253412.png)
 
 ## USAGE
 
@@ -39,4 +32,4 @@ It is divided in following structure:
 
 A sample inventory file given below, we are trying to avoid filling variables here and keeping it simple.
 
-Author & Maintainer: ** *Hemant Gangwar* **
+Author & Maintainer: ***Hemant Gangwar***
