@@ -8,6 +8,7 @@
        name: "{{ item }}"
        state: stopped
      with_items: "{{ mkt_application_service_list }}"
+     when: mkt_application_service_list is defined
      tags: shutdown
 
    - name: Bringing down |SHELL| based applications

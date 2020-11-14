@@ -28,6 +28,15 @@ It is divided in following structure:
 ├── inventory
 └── README.md
 
-Note: Always run the playbook by providing specific tags, else it won't run.
+## USAGE
+
+1. Create host_vars or group_vars directory.
+2. Now create respective hosts or group yaml files as displayed below:
+
+**Note**: The name of the YAML files should be same as name of host or group as mentioned in inventory.
+
+## INVENTORY
+
+A sample inventory file given below, we are trying to avoid filling variables here and keeping it simple.
 
 Author & Maintainer: ** *Hemant Gangwar* **

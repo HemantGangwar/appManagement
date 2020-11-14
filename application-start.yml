@@ -8,6 +8,7 @@
        name: "{{ item }}"
        state: started
      with_items: "{{ mkt_application_service_list }}"
+     when: mkt_application_service_list is defined
      tags: startup
 
    - name: Starting back |SHELL| based applications

@@ -8,6 +8,7 @@
        name: "{{ item }}"
        state: restarted
      with_items: "{{ mkt_application_service_list }}"
+     when: mkt_application_service_list is defined
      tags: restserv
 
    - name: Starting back |SHELL| based applications

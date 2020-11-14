@@ -1,2 +1,3 @@
 node6.lab.example.com
-dnode3
+[docker]
+dnode[1:3]

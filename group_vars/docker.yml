@@ -1,0 +1,3 @@
+---
+application_shell_status_commands:
+ - 'sh -c "sudo /usr/bin/docker node ls"'
