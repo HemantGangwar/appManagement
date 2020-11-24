@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/38517925/86527948-5f983e80-bec1-11ea-9be7-03a6cc7792c8.png)
 
-# appManagent - For application Management on Nix servers
+# appManagement - For application Management on Nix servers
 
 This **Ansible** playbook is meant to do following tasks on EL6/EL7 onwards systems:
 
@@ -24,6 +24,42 @@ It is divided in following structure:
 ## **USAGE**:
 
 1. Create host_vars or group_vars directory.
+
+Sample hostvars file:
+
+vi hostvars/sample.yml
+
+> \---  
+>  mkt_application_service_list:\
+>  \- application1\
+>  \- application2\
+> ...\
+>  \- applicationN
+
+> application_shell_start_commands:\
+>  \- command1\
+>  \- command2\
+> ...\
+>  \- commandN
+
+> application_shell_stop_commands:\
+>  \- command1\
+>  \- command2\
+> ...\
+>  \- commandN
+
+> application_shell_restart_command:\
+>  \- command1\
+>  \- command2\
+> ...\
+>  \- commandN
+
+> application_shell_status_commands:\
+>  \- command1\
+>  \- command2\
+> ...\
+>  \- commandN
+
 2. Now create respective hosts or group yaml files as displayed below. Most importantly notice the use of varibles here.
 
 ![image](https://user-images.githubusercontent.com/38517925/99140412-e2978580-2667-11eb-89e1-eff50046ef30.png)
