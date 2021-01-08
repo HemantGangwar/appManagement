@@ -1,26 +1,31 @@
----
+---   
 # Verification of service status
 # Use this task using below command
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags verify
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags verify
+# Author: Hemant Gangwar
 
-   - name: "|SYSTEMD| service status verification"
-     shell: /bin/systemctl status {{ item }}
-     with_items: "{{ mkt_application_service_list }}"
+   - name: "|SYSTEMD| or |INITD| status verification"
+     service_facts:
+     register: service_state
+     tags: verify
+   - name: Now displaying output of above command
+     debug:
+       var: service_state.ansible_facts.services["{{ item }}.service"].state
      when: 
-     - ansible_distribution_major_version == '7' 
+     - ansible_distribution_major_version == '7'
      - mkt_application_service_list is defined
+     with_items: "{{ mkt_application_service_list }}"
+     tags: verify
+   - name: Now displaying output of above command
+     debug:
+       var: service_state.ansible_facts.services["{{ item }}"].state
+     when: 
+     - ansible_distribution_major_version == '6'
+     - mkt_application_service_list is defined
+     with_items: "{{ mkt_application_service_list }}"
      tags: verify
 
-   - name: "|INITD| service status verification"
-     shell: /etc/init.d/{{ item }} status
-     with_items: "{{ mkt_application_service_list }}"
-     when: 
-     - ansible_distribution_major_version != '7'
-     - mkt_application_service_list is defined
-     register: custom_commands
-     tags: verify
-
-   - name: "|SHELL| commands to verify status of services"
+   - name: "|SHELL| commands to verify status of services if applicable"
      shell: "{{ item }}"
      with_items: "{{ application_shell_status_commands }}"
      when: application_shell_status_commands is defined
@@ -33,3 +38,4 @@
      with_items: "{{ custom_commands.results|map(attribute='stdout')|list }}"
      tags: verify
      ignore_errors: true
+

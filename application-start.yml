@@ -1,7 +1,8 @@
 ---
 # Startup task, make sure to invoke it using appropriate tag
 # Use this task using below command
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags startup
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags startup
+# Author: Hemant Gangwar
 
    - name: Starting back |SYSTEMD| & |INITD| based services
      service:

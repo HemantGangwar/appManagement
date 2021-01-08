@@ -1,7 +1,8 @@
 ---
 # Restart of service status
 # Use this task using below command
-# ansible-playbook -i <inventory_name> main_app_ctrl_playbook.yml --tags restserv
+# ansible-playbook -i <inventory_name> generic_application_control.yml --tags restserv
+# Author: Hemant Gangwar
 
    - name: Restarting back |SYSTEMD| & |INITD| based services
      service:
